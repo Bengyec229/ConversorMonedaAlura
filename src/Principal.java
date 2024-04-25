@@ -87,10 +87,8 @@ public class Principal {
             try {
                 double resultado = conversor.convertir();
                 System.out.println(cantidad+""+ deDivisa + "equivale" + resultado + "" + aDivisa );
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (InterruptedException e) {
-                System.out.println("Error al realizar la conversión: " + e.getMessage());
+            } catch (IOException | InterruptedException e) {
+                System.out.println("Error al realizar la conversión" + e.getMessage());;
             }
         }
     }
