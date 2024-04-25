@@ -1,9 +1,11 @@
 import Repositorio.Repositorio;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
             System.out.println("Bienvenido al Conversor de Moneda de Benjamin");
             System.out.println("+++++++++++++++++++++++++++++++++++++");
@@ -16,40 +18,66 @@ public class Principal {
                 System.out.println("5. Usd a Peso Colombiano");
                 System.out.println("6. Peso Colombiano a Dolar");
                 System.out.println("7. Salir");
-
                 System.out.println("+++++++++++++++++++++++++++++++++");
                 System.out.println("\nElija una opción:");
 
-                String menu = """
-                        ***********************************************
-                          Cual es la Conversion que desea realizar:
-                          1.- De USD a PesoArgentino
-                          2.- De Peso Argentino a USD
-                          3.- De USD a Real Brasileño
-                          4.- De Real Brasileño a USD
-                          5.- De USD a Peso Colombiano
-                          6.- De Peso Colombiano A USD
-                          7.- Salir
-                          
-                          
-                \n******************************************
-                        """;
+                int opcion = scanner.nextInt();
+                String monedaDestino = "moneda";
+                String monedaDestinoARS = "ARS";
+                String monedaDestinoBRL = "BRL";
+                String monedaDestinoCOP = "COP";
+
+
+                double cantidadUSD = 0;
+                switch (opcion) {
+                    case 1:
+                        monedaDestinoARS = "ARS";
+                        System.out.println("Ingrese la Cantidad en USD:");
+                        cantidadUSD = scanner.nextDouble();
+                    case 2:
+                        monedaDestino = "USD";
+                        System.out.println("Ingresa la cantidad en Pesos Argentinos:");
+                        cantidadUSD = scanner.nextDouble();
+                    case 3:
+                        monedaDestino = "COP";
+                        System.out.println("Ingrese la cantidad en USD:");
+                        cantidadUSD = scanner.nextDouble();
+                    case 4:
+                        monedaDestino = "USD";
+                        System.out.println("Ingrese la cantidad en Peso Colombiano:");
+                        cantidadUSD = scanner.nextDouble();
+                    case 5:
+                        monedaDestino = "BRL";
+                        System.out.println("Ingrese la cantidad en USD:");
+                        cantidadUSD = scanner.nextDouble();
+                    case 6:
+                        monedaDestino = "BRL";
+                        System.out.println("Ingrese la cantidad en Real Brasileño:");
+                        cantidadUSD = scanner.nextDouble();
+                    case 7:
+                        System.out.println("Gracias por usar el mejor conversor, Hasta luego!");
+                        return;
+                    default:
+                        System.out.println("Opción inválida, por favor ingrese una opción válida (1-7).");
+                }
+                double cantidadConvertida = 0;
                 try {
-                    double Scanner = 0;
-                    double cantidadUSD = Scanner;
-                    String monedaDestino = "moneda";
-                    double cantidadConvertida = Conversor.convertirMoneda(cantidadUSD,monedaDestino);
-                    Repositorio repositorio = new Repositorio();
-                    repositorio.guardarConversion(monedaDestino,cantidadConvertida);
-                    System.out.println("Cantidad convertida a" + monedaDestino + ":" + cantidadConvertida);
-                    
-                } catch (Exception e) {
-                    System.out.println("Error al obtener la tasa de cambio"); e.printStackTrace();
+                    cantidadConvertida = Conversor.convertirMoneda(cantidadUSD, monedaDestino);
+                    System.out.println("Cantidad convertida a " + monedaDestino + ":" + cantidadConvertida);
+                } catch (IOException e) {
+                    System.out.println("error al obtener tasa de cambio:" + e.getMessage());
                 }
 
 
+                Repositorio repositorio = new Repositorio();
+                repositorio.guardarConversion(monedaDestino, cantidadConvertida);
+                System.out.println("Cantidad convertida a" + monedaDestino + ":" + cantidadConvertida);
+
             }
+                }
 
 
-        }
-    }
+}
+
+
+
