@@ -1,47 +1,63 @@
+import netscape.javascript.JSException;
+import netscape.javascript.JSObject;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.Scanner;
 
 public class Conversor {
-    public static void main(String[] args) {
-            System.out.println("Bienvenido al Conversor de Moneda de Benjamin");
-            System.out.println("+++++++++++++++++++++++++++++++++++++");
+    private static final String API_URL = "https://v6.exchangerate-api.com/v6/52fe9542f0cbd87a466a3acb/latest/USD";
 
-            while (true) {
-                System.out.println("\nMenu:");
-                System.out.println("1. Usd a Peso Argentino");
-                System.out.println("2. Peso Argentino a Dolar");
-                System.out.println("3. Usd a Real Brasileño");
-                System.out.println("4. Real Brasileño a Dolar");
-                System.out.println("5. Usd a Peso Colombiano");
-                System.out.println("6. Peso Colombiano a Dolar");
-                System.out.println("7. Salir");
+    public static double convertirMoneda(double cantidad, String monedaDestino) throws IOException, IOException {
+        // Obtener las tasas de cambio desde la API
+        URL url = new URL(API_URL);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        Scanner scanner = new Scanner(connection.getInputStream());
+        StringBuilder respose = new StringBuilder();
+        while (scanner.hasNextLine()) ;
+        scanner.close();
+        JSObject jsonResponse = new JSObject() {
+            @Override
+            public Object call(String methodName, Object... args) throws JSException {
+                return null;
+            }
 
-                System.out.println("+++++++++++++++++++++++++++++++++");
-                System.out.println("\nElija una opción:");
+            @Override
+            public Object eval(String s) throws JSException {
+                return null;
+            }
 
-                String menu = """
-                        ***********************************************
-                          Cual es la Conversion que desea realizar:
-                          1.- De USD a PesoArgentino
-                          2.- De Peso Argentino a USD
-                          3.- De USD a Real Brasileño
-                          4.- De Real Brasileño a USD
-                          5.- De USD a Peso Colombiano
-                          6.- De Peso Colombiano A USD
-                          7.- Salir
-                          
-                          
-                \n******************************************
-                        """;
-                Scanner scanner = new Scanner(System.in);
-                int opcion = scanner.nextInt(); scanner.nextLine();
-                if (opcion == 7);{
-                    System.out.println("Gracias por usar el mejor conversor, hasta luego");
-                }
-                System.out.println("ingresa la cantidad a convertir");
-                double cantidad = scanner.nextDouble();
+            @Override
+            public Object getMember(String name) throws JSException {
+                return null;
+            }
 
-                }
+            @Override
+            public void setMember(String name, Object value) throws JSException {
 
+            }
 
-        }
+            @Override
+            public void removeMember(String name) throws JSException {
+
+            }
+
+            @Override
+            public Object getSlot(int index) throws JSException {
+                return null;
+            }
+
+            @Override
+            public void setSlot(int index, Object value) throws JSException {
+
+            }
+        };
+
+        return cantidad;
+
     }
+}
